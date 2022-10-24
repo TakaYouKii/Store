@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   {{ news_item.title }} : {{ block.super}}
+{% endblock %}
+
+
+{% block sidebar %}
+    {% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div style="display:flex;
+justify-content: row;">
+         <div>
+            {% if news_item.photo %}
+            <img src="{{ news_item.photo.url}}" width="350">
+            {% else %}
+            <img src="https://picsum.photos/id/870/200/300?grayscale&blur=2" width="300" height="300">
+            {% endif %}
+         </div>
+        <div>
+            <div>
+                <h3 class="title"> {{ news_item.title }}</h3>
+                <p> {{ news_item.content }}</p>
+                <a class="read_more" href="{{ news_item.get_absolute_url }}"><bottom>Read more...</bottom> </a>
+            </div>
+            <div> {{ news_item.created_at| date:"Y-m-d h:i" }}</div>
+        </div>
+
+        <hr>
+    </div>
+
+{% endblock %}
+

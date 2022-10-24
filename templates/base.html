@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Новости со всего мира {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    {% include 'inc/_nav.html' %}
+
+    {% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'error' %}
+        <div role="alert">{{message}}</div>
+    {% else %}
+        <div role="alert">{{message}}</div>
+    {% endif %}
+{% endfor %}
+{% endif %}
+<div style="display: flex;
+justify-content: row
+justify-content-space-around;" >
+    <div style="float:left;
+margin-right: 20%">
+        {% block sidebar %} SIDEBAR {% endblock %}
+    </div>
+
+    <div style="float;right;
+margin-left:100px;">
+        {% block content %} CONTENT {% endblock %}
+        <nav>
+    <ul>
+        {% for p in paginator.page_range %}
+        <li>
+            <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+    </div>
+</div>
+
+
+
+</body>
+</html>

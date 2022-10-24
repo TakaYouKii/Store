@@ -1,0 +1,12 @@
+
+<div style="max-width:200px;
+display:inline;
+background: blue;">
+    <div>
+    {% for item in categories %}
+            <a href="{{ item.get_absolute_url }}"><h3>{{ item.title }}</h3></a>
+    {% endfor %}
+    </div>
+</div>
+
+

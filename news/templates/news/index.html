@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   {{ title }} : {{ block.super}}
+{% endblock %}
+
+
+{% block sidebar %}
+    {% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+
+{% block content %}
+{%  for item in news  %}
+    <div class="blog">
+         <div class="img_blog">
+            {% if item.photo %}
+            <img src="{{ item.photo.url}}" width="350">
+            {% else %}
+            <img src="https://picsum.photos/id/870/200/300?grayscale&blur=2" width="300" height="300">
+            {% endif %}
+             <div>Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></div>
+         </div>
+
+        <div class="content_blog">
+            <div>
+                <h3 class="title"> {{ item.title }}</h3>
+                <p> {{ item.content }}</p>
+                <a class="read_more" href="{{ item.get_absolute_url }}"><bottom>Read more...</bottom></a>
+            </div>
+            <div> {{ item.created_at| date:"Y-m-d h:i" }}</div>
+        </div>
+    </div>
+    <hr>
+{% endfor %}
+{% endblock %}
+
